@@ -5,7 +5,7 @@
 </template>
 
 <style scoped>
- .stat {
-   color: red;
- }
+  .stat {
+    color: red;
+  }
 </style>
