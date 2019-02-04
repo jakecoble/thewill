@@ -1,4 +1,6 @@
 export default {
+  namespaced: true,
+
   state: {
     money: {
       display_name: 'money',
@@ -25,6 +27,15 @@ export default {
       value: 100,
       decay: 10,
       mood_decay: 1
+    }
+  },
+
+  mutations: {
+    decay (state) {
+      for (var stat in state) {
+        state[stat].value -= state[stat].decay
+        state[stat].value = Math.max(state[stat].value, 0)
+      }
     }
   }
 }

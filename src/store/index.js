@@ -15,17 +15,11 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    decay ({ stats }) {
-      for (var stat in stats) {
-        stats[stat].value -= stats[stat].decay
-        stats[stat].value = Math.max(stats[stat].value, 0)
-      }
-    }
   },
 
   actions: {
     endDay ({ commit }) {
-      commit('decay')
+      commit('stats/decay')
     }
   }
 })
