@@ -4,29 +4,20 @@ export default {
   state: {
     money: {
       display_name: 'money',
-      value: 50,
-      decay: 10,
-      mood_decay: 1
+      value: 1000,
+      decay: 20,
     },
 
     hygiene: {
       display_name: 'hygiene',
       value: 100,
       decay: 10,
-      mood_decay: 1
     },
 
-    mood: {
-      display_name: 'mood',
-      value: 50,
-      decay: 10
-    },
-
-    room: {
-      display_name: 'room',
+    organization: {
+      display_name: 'organization',
       value: 100,
       decay: 10,
-      mood_decay: 1
     }
   },
 
