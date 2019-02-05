@@ -5,19 +5,19 @@ export default {
     money: {
       display_name: 'money',
       value: 1000,
-      decay: 20,
+      decay: 20
     },
 
     hygiene: {
       display_name: 'hygiene',
       value: 100,
-      decay: 10,
+      decay: 10
     },
 
     org: {
       display_name: 'organization',
       value: 100,
-      decay: 10,
+      decay: 10
     }
   },
 

@@ -19,8 +19,10 @@ export default {
       const d = (modifier) => {
         state[modifier].decay -= 1
 
-        if (state[modifier].decay == 0) state[modifier].active = false
+        if (state[modifier].decay === 0) state[modifier].active = false
       }
+
+      d('medicine')
     }
   },
 
