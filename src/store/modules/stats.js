@@ -14,7 +14,7 @@ export default {
       decay: 10,
     },
 
-    organization: {
+    org: {
       display_name: 'organization',
       value: 100,
       decay: 10,
@@ -23,10 +23,14 @@ export default {
 
   mutations: {
     decay (state) {
-      for (var stat in state) {
+      const d = (stat) => {
         state[stat].value -= state[stat].decay
         state[stat].value = Math.max(state[stat].value, 0)
       }
+
+      d('money')
+      d('hygiene')
+      d('org')
     }
   }
 }
