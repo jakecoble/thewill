@@ -19,23 +19,28 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    spendSpoons (state, spoons) {
-      state.spoons -= spoons
-    },
-
-    spendMoney (state, money) {
-      state.stats.money.value -= money
+    spoons (state, spoons) {
+      state.spoons += spoons
     }
   },
 
   actions: {
-    activate (store, choice) {
-      choice = store.state.choices[choice]
-      store.commit('spendSpoons', choice.spoons_cost)
-      store.commit('spendMoney', choice.money_cost)
+    activate ({ commit, dispatch, state }, choice) {
+      let c = state.choices[choice]
+      let costs = {
+        spoons: c.spoons_cost || 0,
+        money: c.money_cost || 0,
+        hygiene: c.hygiene_cost || 0,
+        org: c.org_cost || 0
+      }
 
-      for (let mod in choice.modifiers) {
-        store.commit('modifiers/activate', mod)
+      if (state.spoons - costs.spoons >= 0 &&
+          dispatch('stats/spend', costs)) {
+        commit('spoons', -costs.spoons)
+
+        for (let mod in c.modifiers) {
+          dispatch('modifiers/activate', mod)
+        }
       }
     },
 
