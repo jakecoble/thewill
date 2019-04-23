@@ -3,10 +3,21 @@ export default {
 
   state: {
     medicine: {
-      spoon_multi: 2,
+      will: 3,
       duration: 7,
       decay: 7,
       active: false
+    },
+
+    tired: {
+      will: -2,
+      active: false
+    },
+
+    hungry: {
+      will: -2,
+      addChoices: ['eat'],
+      active: true
     }
   },
 
