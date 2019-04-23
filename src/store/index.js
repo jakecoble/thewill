@@ -16,7 +16,8 @@ export default new Vuex.Store({
 
   state: {
     will: 0,
-    maxWill: 10
+    maxWill: 10,
+    money: 1000
   },
 
   mutations: {

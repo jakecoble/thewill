@@ -2,11 +2,6 @@ export default {
   namespaced: true,
 
   state: {
-    money: {
-      display_name: 'money',
-      value: 1000
-    },
-
     hygiene: {
       display_name: 'hygiene',
       value: 100

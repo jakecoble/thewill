@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    will: {{ will }}/{{ maxWill }}
+    will: {{ will }}/{{ maxWill }} | money: {{ money }}
     <Stats/>
     <EndDayButton/>
   </div>
@@ -20,7 +20,8 @@
     },
     computed: mapState({
       will: store => store.will,
-      maxWill: store => store.maxWill
+      maxWill: store => store.maxWill,
+      money: store => store.money
     })
   }
 </script>
