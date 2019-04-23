@@ -15,18 +15,20 @@ export default new Vuex.Store({
   },
 
   state: {
-    spoons: 1
+    will: 0,
+    maxWill: 10
   },
 
   mutations: {
-    spoons (state, spoons) {
-      state.spoons += spoons
+    resetWill (state) {
+      state.will = state.maxWill
     }
   },
 
   actions: {
     endDay ({ commit }) {
       commit('modifiers/decay')
+      commit('resetWill')
     }
   }
 })

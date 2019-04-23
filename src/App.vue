@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    Spoons: {{ spoons }}
+    will: {{ will }}/{{ maxWill }}
     <Stats/>
     <EndDayButton/>
   </div>
@@ -19,7 +19,8 @@
       EndDayButton
     },
     computed: mapState({
-      spoons: store => store.spoons
+      will: store => store.will,
+      maxWill: store => store.maxWill
     })
   }
 </script>
