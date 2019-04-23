@@ -2,6 +2,7 @@
   <div id="app">
     will: {{ will }}/{{ maxWill }} | money: {{ money }}
     <Stats/>
+    <Modifiers/>
     <EndDayButton/>
   </div>
 </template>
@@ -10,12 +11,14 @@
   import { mapState } from 'vuex'
 
   import Stats from './components/Stats.vue'
+  import Modifiers from './components/Modifiers.vue'
   import EndDayButton from './components/EndDayButton.vue'
 
   export default {
     name: 'app',
     components: {
       Stats,
+      Modifiers,
       EndDayButton
     },
     computed: mapState({
