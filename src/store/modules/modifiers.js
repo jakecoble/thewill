@@ -13,7 +13,8 @@ export default {
     tired: {
       display_name: 'Tired',
       will: -2,
-      active: false
+      org: -2,
+      active: true
     },
 
     hungry: {
@@ -35,6 +36,10 @@ export default {
       }
 
       return active
+    },
+
+    reducedModBonuses: (state, getters) => (bonusType) => {
+      return getters.activeMods.reduce((bonus, mod) => bonus + (mod[bonusType] || 0), 0)
     }
   },
 
