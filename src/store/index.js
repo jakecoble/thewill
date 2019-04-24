@@ -16,13 +16,23 @@ export default new Vuex.Store({
 
   state: {
     will: 0,
-    maxWill: 10,
+    baseMaxWill: 10,
     money: 1000
+  },
+
+  getters: {
+    maxWill (state, getters) {
+      var maxWill = state.baseMaxWill
+      var activeMods = getters['modifiers/activeMods']
+
+      maxWill += activeMods.reduce((will, mod) => will + mod.will || 0, 0)
+      return maxWill
+    }
   },
 
   mutations: {
     resetWill (state) {
-      state.will = state.maxWill
+      state.will = state.getters.maxWill
     }
   },
 

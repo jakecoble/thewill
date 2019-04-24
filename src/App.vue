@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapGetters, mapState } from 'vuex'
 
   import Stats from './components/Stats.vue'
   import Modifiers from './components/Modifiers.vue'
@@ -21,11 +21,16 @@
       Modifiers,
       EndDayButton
     },
-    computed: mapState({
-      will: store => store.will,
-      maxWill: store => store.maxWill,
-      money: store => store.money
-    })
+    computed: {
+      ...mapGetters([
+        'maxWill'
+      ]),
+
+      ...mapState({
+        will: store => store.will,
+        money: store => store.money
+      })
+    }
   }
 </script>
 
