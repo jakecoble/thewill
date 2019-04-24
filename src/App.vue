@@ -35,6 +35,14 @@
 </script>
 
 <style>
-#app {
-}
+  body, div, ul, li {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font: inherit;
+  }
+
+  ul {
+    list-style: none;
+  }
 </style>
