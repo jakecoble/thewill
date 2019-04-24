@@ -14,7 +14,8 @@ export default {
       display_name: 'Tired',
       will: -2,
       org: -2,
-      active: true
+      active: true,
+      hidden: true
     },
 
     hungry: {
