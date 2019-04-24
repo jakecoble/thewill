@@ -1,7 +1,7 @@
 <template functional>
   <li class="modifier">
-    <div v-if="!props.mod.hidden" class="name hidden">???</div>
-    <div v-else class="name">{{ props.mod.display_name }}</div>
+    <div v-if="!props.mod.hidden" class="name">{{ props.mod.display_name }}</div>
+    <div v-else class="name hidden">???</div>
 
     <ul class="statBonuses">
       <li v-if="props.mod.will" class="statBonus">
