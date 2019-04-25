@@ -32,6 +32,7 @@
 
 <style scoped>
   .modifier {
+    padding: 5px;
   }
 
   .name {
@@ -42,15 +43,22 @@
   }
 
   .statBonuses {
+    padding: 0 5px 0 5px;
     display: inline-block;
   }
 
   .statBonus {
+    margin: 0 5px 0 5px;
     display: inline-block;
   }
 
   .statBonusName {
     display: inline-block;
+    margin-right: 5px;
+  }
+
+  .statBonusName:after {
+    content: ":";
   }
 
   .statBonusValue {
@@ -58,5 +66,6 @@
   }
 
   .description {
+    font-style: italic;
   }
 </style>

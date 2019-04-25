@@ -1,9 +1,13 @@
 <template>
   <div id="app">
-    will: {{ will }}/{{ maxWill }} | money: {{ money }}
-    <Stats/>
-    <Modifiers/>
-    <EndDayButton/>
+    <div class="resources">
+      will: {{ will }}/{{ maxWill }} | money: {{ money }}
+    </div>
+    <div class="panel-group">
+      <Stats class="panel" />
+      <Modifiers class="panel" />
+    </div>
+    <EndDayButton />
   </div>
 </template>
 
@@ -44,5 +48,13 @@
 
   ul {
     list-style: none;
+  }
+
+  .panel-group {
+    display: flex;
+  }
+
+  .panel {
+    flex-grow: 1;
   }
 </style>

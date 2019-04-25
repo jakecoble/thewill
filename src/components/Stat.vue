@@ -6,6 +6,5 @@
 
 <style scoped>
   .stat {
-    color: red;
   }
 </style>
