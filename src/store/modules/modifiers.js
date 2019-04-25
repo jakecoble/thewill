@@ -24,7 +24,7 @@ export default {
       display_name: 'Hungry',
       description: 'Your stomach rumbles in complaint.',
       will: -2,
-      addChoices: ['eat'],
+      addActions: ['eat'],
       active: true
     }
   },

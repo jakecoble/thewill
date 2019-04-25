@@ -3,13 +3,13 @@ import Vuex from 'vuex'
 
 import stats from './modules/stats'
 import modifiers from './modules/modifiers'
-import choices from './modules/choices'
+import actions from './modules/actions'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    choices,
+    actions,
     modifiers,
     stats
   },

@@ -21,12 +21,12 @@ export default {
   },
 
   getters: {
-    availableChoices (state) {
+    availableActions (state) {
       var available = []
 
-      for (let choice in state) {
-        if (state[choice].available) {
-          available.push(state[choice])
+      for (let action in state) {
+        if (state[action].available) {
+          available.push(state[action])
         }
       }
 
