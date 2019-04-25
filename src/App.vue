@@ -6,6 +6,7 @@
     <div class="panel-group">
       <Stats class="panel" />
       <Modifiers class="panel" />
+      <Choices class="panel" />
     </div>
     <EndDayButton />
   </div>
@@ -16,6 +17,7 @@
 
   import Stats from './components/Stats.vue'
   import Modifiers from './components/Modifiers.vue'
+  import Choices from './components/Choices.vue'
   import EndDayButton from './components/EndDayButton.vue'
 
   export default {
@@ -23,6 +25,7 @@
     components: {
       Stats,
       Modifiers,
+      Choices,
       EndDayButton
     },
     computed: {
