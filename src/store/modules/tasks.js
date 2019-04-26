@@ -7,8 +7,13 @@ export default {
       display_name: 'Visit the doctor.',
       will_cost: 5,
       money_cost: 50,
-      addMods: ['MEDICATED'],
-      removeMods: [],
+      effects: [
+        {
+          chance: 0.75,
+          type: 'ADD_MOD',
+          targetId: 'MEDICATED'
+        }
+      ],
       enabled: true
     },
 
@@ -17,8 +22,13 @@ export default {
       display_name: 'Eat canned food.',
       will_cost: 1,
       money_cost: 2,
-      addMods: [],
-      removeMods: ['HUNGRY'],
+      effects: [
+        {
+          chance: 1,
+          type: 'REMOVE_MOD',
+          targetId: 'HUNGRY'
+        }
+      ],
       enabled: true
     }
   ],
@@ -48,8 +58,20 @@ export default {
       var task = state.find(task => task.id === taskId)
 
       if (task.enabled) {
-        task.addMods.forEach(mod => commit('modifiers/activate', mod, { root: true }))
-        task.removeMods.forEach(mod => commit('modifiers/deactivate', mod, { root: true }))
+        task.effects.forEach(effect => {
+          var fired = Math.random() < effect.chance
+
+          if (fired) {
+            switch (effect.type) {
+              case 'ADD_MOD':
+                commit('modifiers/activate', effect.targetId, { root: true })
+                break
+              case 'REMOVE_MOD':
+                commit('modifiers/deactivate', effect.targetId, { root: true })
+                break
+            }
+          }
+        })
 
         commit('disable', task.id)
       }
