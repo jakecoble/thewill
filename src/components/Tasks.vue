@@ -5,6 +5,8 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
+
   import Task from './Task.vue'
 
   export default {
@@ -20,9 +22,9 @@
     },
 
     methods: {
-      activateTask (taskId) {
-        this.$store.dispatch('tasks/activate', taskId)
-      }
+      ...mapActions([
+        'activateTask'
+      ])
     }
   }
 </script>

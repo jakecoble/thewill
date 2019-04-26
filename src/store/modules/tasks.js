@@ -94,10 +94,19 @@ export default {
       }
     },
 
-    activateIfAffordable ({ dispatch, state }, task, { will, money }) {
-      if (will >= state[task].will_cost && money >= state[task].money_cost) {
-        dispatch('activate', task)
+    activateIfAffordable ({ dispatch, state }, { taskId, will, money }) {
+      var task = state.find(task => task.id === taskId)
+
+      if (will >= task.will_cost && money >= task.money_cost) {
+        dispatch('activate', task.id)
+
+        return {
+          will: task.will_cost,
+          money: task.money_cost
+        }
       }
+
+      return null
     }
   }
 }
