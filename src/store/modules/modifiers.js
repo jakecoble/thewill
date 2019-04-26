@@ -56,18 +56,15 @@ export default {
 
   mutations: {
     activate (state, modId) {
-      var mod = state.find(mod => mod.id === modId)
-      mod.active = true
+      state.find(mod => mod.id === modId).active = true
     },
 
     deactivate (state, modId) {
-      var mod = state.find(mod => mod.id === modId)
-      mod.active = false
+      state.find(mod => mod.id === modId).active = false
     },
 
     reveal (state, modId) {
-      var mod = state.find(mod => mod.id === modId)
-      mod.hidden = false
+      state.find(mod => mod.id === modId).hidden = false
     },
 
     decay (state, modId) {

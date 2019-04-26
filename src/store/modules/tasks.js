@@ -49,15 +49,7 @@ export default {
 
   getters: {
     availableTasks (state) {
-      var available = []
-
-      for (let task of state) {
-        if (task.enabled) {
-          available.push(task)
-        }
-      }
-
-      return available
+      return state.filter(task => task.enabled)
     }
   },
 
