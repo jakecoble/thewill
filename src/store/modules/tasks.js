@@ -30,6 +30,20 @@ export default {
         }
       ],
       enabled: true
+    },
+
+    {
+      id: 'VISIT_THERAPIST',
+      display_name: 'Visit a therapist.',
+      will_cost: 2,
+      money_cost: 100,
+      effects: [
+        {
+          chance: 1,
+          type: 'REVEAL_MOD'
+        }
+      ],
+      enabled: true
     }
   ],
 
@@ -54,7 +68,7 @@ export default {
   },
 
   actions: {
-    activate ({ commit, state }, taskId) {
+    activate ({ commit, dispatch, state }, taskId) {
       var task = state.find(task => task.id === taskId)
 
       if (task.enabled) {
@@ -68,6 +82,9 @@ export default {
                 break
               case 'REMOVE_MOD':
                 commit('modifiers/deactivate', effect.targetId, { root: true })
+                break
+              case 'REVEAL_MOD':
+                dispatch('modifiers/revealRandom', null, { root: true })
                 break
             }
           }

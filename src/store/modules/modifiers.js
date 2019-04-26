@@ -45,6 +45,10 @@ export default {
       return active
     },
 
+    hiddenMods (state) {
+      return state.filter(mod => mod.hidden)
+    },
+
     reducedModBonuses: (state, getters) => (bonusType) => {
       return getters.activeMods.reduce((bonus, mod) => bonus + (mod[bonusType] || 0), 0)
     }
@@ -59,9 +63,20 @@ export default {
     deactivate (state, modId) {
       var mod = state.find(mod => mod.id === modId)
       mod.active = false
+    },
+
+    reveal (state, modId) {
+      var mod = state.find(mod => mod.id === modId)
+      mod.hidden = false
     }
   },
 
   actions: {
+    revealRandom ({ commit, getters }) {
+      var hidden = getters.hiddenMods
+      var idx = Math.floor(Math.random() * hidden.length)
+
+      commit('reveal', hidden[idx].id)
+    }
   }
 }
