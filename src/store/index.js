@@ -53,11 +53,8 @@ export default new Vuex.Store({
         will: state.will,
         money: state.money
       }).then(spent => {
-        if (spent) {
-          commit('spend', spent)
-        }
-      })
-
+        commit('spend', spent)
+      }).catch(e => console.log(e))
     }
   }
 })

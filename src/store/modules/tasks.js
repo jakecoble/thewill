@@ -97,16 +97,18 @@ export default {
     activateIfAffordable ({ dispatch, state }, { taskId, will, money }) {
       var task = state.find(task => task.id === taskId)
 
-      if (will >= task.will_cost && money >= task.money_cost) {
-        dispatch('activate', task.id)
+      return new Promise((resolve, reject) => {
+        if (will >= task.will_cost && money >= task.money_cost) {
+          dispatch('activate', task.id)
 
-        return {
-          will: task.will_cost,
-          money: task.money_cost
+          resolve({
+            will: task.will_cost,
+            money: task.money_cost
+          })
+        } else {
+          reject(new Error('Attempted to purchase unaffordable task'))
         }
-      }
-
-      return null
+      })
     }
   }
 }
