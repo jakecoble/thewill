@@ -8,7 +8,7 @@ export default {
       description: 'Sometimes a salve, sometimes an ordeal, always a gamble.',
       will: 3,
       duration: 7,
-      decay: 7,
+      currentDecay: 0,
       active: false
     },
 
@@ -68,6 +68,14 @@ export default {
     reveal (state, modId) {
       var mod = state.find(mod => mod.id === modId)
       mod.hidden = false
+    },
+
+    decay (state, modId) {
+      state.find(mod => mod.id === modId).currentDecay += 1
+    },
+
+    resetDecay (state, modId) {
+      state.find(mod => mod.id === modId).currentDecay = 0
     }
   },
 
@@ -77,6 +85,17 @@ export default {
       var idx = Math.floor(Math.random() * hidden.length)
 
       commit('reveal', hidden[idx].id)
+    },
+
+    decay ({ commit, state }) {
+      state.forEach(mod => {
+        commit('decay', mod.id)
+
+        if (mod.currentDecay === mod.duration) {
+          commit('deactivate', mod.id)
+          commit('resetDecay', mod.id)
+        }
+      })
     }
   }
 }

@@ -42,8 +42,8 @@ export default new Vuex.Store({
   },
 
   actions: {
-    endDay ({ commit, getters, state }) {
-      // commit('modifiers/decay')
+    endDay ({ commit, dispatch, getters, state }) {
+      dispatch('modifiers/decay')
       commit('will', getters['maxWill'])
     },
 
