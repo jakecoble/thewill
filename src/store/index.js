@@ -31,8 +31,8 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    resetWill (state) {
-      state.will = state.getters.maxWill
+    will (state, will) {
+      state.will = will
     },
 
     spend (state, { will, money }) {
@@ -42,9 +42,9 @@ export default new Vuex.Store({
   },
 
   actions: {
-    endDay ({ commit }) {
-      commit('modifiers/decay')
-      commit('resetWill')
+    endDay ({ commit, getters, state }) {
+      // commit('modifiers/decay')
+      commit('will', getters['maxWill'])
     },
 
     activateTask ({ commit, dispatch, state }, taskId) {
