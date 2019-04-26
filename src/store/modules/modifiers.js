@@ -1,8 +1,9 @@
 export default {
   namespaced: true,
 
-  state: {
-    medicine: {
+  state: [
+    {
+      id: 'MEDICATED',
       display_name: 'Medicated',
       description: 'Sometimes a salve, sometimes an ordeal, always a gamble.',
       will: 3,
@@ -11,7 +12,8 @@ export default {
       active: false
     },
 
-    tired: {
+    {
+      id: 'TIRED',
       display_name: 'Tired',
       description: 'Your body is heavy with the weight of fatigue.',
       will: -2,
@@ -20,22 +22,23 @@ export default {
       hidden: true
     },
 
-    hungry: {
+    {
+      id: 'HUNGRY',
       display_name: 'Hungry',
       description: 'Your stomach rumbles in complaint.',
       will: -2,
-      addTasks: ['eat'],
+      addTasks: ['EAT_CANNED_FOOD'],
       active: true
     }
-  },
+  ],
 
   getters: {
     activeMods (state) {
       var active = []
 
-      for (let mod in state) {
-        if (state[mod].active) {
-          active.push(state[mod])
+      for (let mod of state) {
+        if (mod.active) {
+          active.push(mod)
         }
       }
 
@@ -48,12 +51,14 @@ export default {
   },
 
   mutations: {
-    activate (state, mod) {
-      state[mod].active = true
+    activate (state, modId) {
+      var mod = state.find(mod => mod.id === modId)
+      mod.active = true
     },
 
-    deactivate (state, mod) {
-      state[mod].active = false
+    deactivate (state, modId) {
+      var mod = state.find(mod => mod.id === modId)
+      mod.active = false
     }
   },
 

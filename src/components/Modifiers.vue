@@ -1,6 +1,6 @@
 <template>
   <ul class="modifiers">
-    <Modifier v-for="mod in sortedActiveMods" :mod="mod" :key="mod.display_name" />
+    <Modifier v-for="mod in sortedActiveMods" :mod="mod" :key="mod.id" />
   </ul>
 </template>
 
