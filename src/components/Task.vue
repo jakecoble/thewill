@@ -10,7 +10,7 @@
       </li>
     </ul>
 
-    <div class="task-name">{{ props.task.display_name }}</div>
+    <div class="task-name" @click="props.callback(props.task.id)">{{ props.task.display_name }}</div>
 
     <div class="task-info-card"></div>
   </li>

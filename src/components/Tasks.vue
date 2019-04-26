@@ -1,6 +1,6 @@
 <template>
   <ul class="tasks">
-    <Task v-for="task in availableTasks" :task="task" :key="task.display_name" />
+    <Task v-for="task in availableTasks" :task="task" :key="task.id" :callback="activateTask" />
   </ul>
 </template>
 
@@ -16,6 +16,12 @@
     computed: {
       availableTasks () {
         return this.$store.getters['tasks/availableTasks']
+      }
+    },
+
+    methods: {
+      activateTask (taskId) {
+        this.$store.dispatch('tasks/activate', taskId)
       }
     }
   }

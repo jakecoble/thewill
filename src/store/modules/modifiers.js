@@ -48,6 +48,13 @@ export default {
   },
 
   mutations: {
+    activate (state, mod) {
+      state[mod].active = true
+    },
+
+    deactivate (state, mod) {
+      state[mod].active = false
+    }
   },
 
   actions: {
