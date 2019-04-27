@@ -5,7 +5,7 @@ export var TaskIds = {
 }
 
 export var EffectTypes = {
-  EFFECT_TYPE_ADD_MOD: 'ADD_MOD',
-  EFFECT_TYPE_REMOVE_MOD: 'REMOVE_MOD',
-  EFFECT_TYPE_REVEAL_MOD: 'REVEAL_MOD'
+  ADD_MOD: 'ADD_MOD',
+  REMOVE_MOD: 'REMOVE_MOD',
+  REVEAL_MOD: 'REVEAL_MOD'
 }
