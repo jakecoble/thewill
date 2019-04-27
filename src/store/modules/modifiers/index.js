@@ -1,9 +1,12 @@
+import { ModIds } from './constants.js'
+import { TaskIds } from '../tasks/constants.js'
+
 export default {
   namespaced: true,
 
   state: [
     {
-      id: 'MEDICATED',
+      id: ModIds.MEDICATED,
       display_name: 'Medicated',
       description: 'Sometimes a salve, sometimes an ordeal, always a gamble.',
       will: 3,
@@ -13,7 +16,7 @@ export default {
     },
 
     {
-      id: 'TIRED',
+      id: ModIds.TIRED,
       display_name: 'Tired',
       description: 'Your body is heavy with the weight of fatigue.',
       will: -2,
@@ -23,11 +26,11 @@ export default {
     },
 
     {
-      id: 'HUNGRY',
+      id: ModIds.HUNGRY,
       display_name: 'Hungry',
       description: 'Your stomach rumbles in complaint.',
       will: -2,
-      addTasks: ['EAT_CANNED_FOOD'],
+      addTasks: [TaskIds.EAT_CANNED_FOOD],
       active: true
     }
   ],
