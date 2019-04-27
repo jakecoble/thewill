@@ -1,16 +1,18 @@
+import { TaskIds, EffectTypes } from './constants.js'
+
 export default {
   namespaced: true,
 
   state: [
     {
-      id: 'VISIT_DOCTOR',
+      id: TaskIds.VISIT_DOCTOR,
       display_name: 'Visit the doctor.',
       will_cost: 5,
       money_cost: 50,
       effects: [
         {
           chance: 0.75,
-          type: 'ADD_MOD',
+          type: EffectTypes.ADD_MOD,
           targetId: 'MEDICATED'
         }
       ],
@@ -18,14 +20,14 @@ export default {
     },
 
     {
-      id: 'EAT_CANNED_FOOD',
+      id: TaskIds.EAT_CANNED_FOOD,
       display_name: 'Eat canned food.',
       will_cost: 1,
       money_cost: 2,
       effects: [
         {
           chance: 1,
-          type: 'REMOVE_MOD',
+          type: EffectTypes.REMOVE_MOD,
           targetId: 'HUNGRY'
         }
       ],
@@ -33,14 +35,14 @@ export default {
     },
 
     {
-      id: 'VISIT_THERAPIST',
+      id: TaskIds.VISIT_THERAPIST,
       display_name: 'Visit a therapist.',
       will_cost: 2,
       money_cost: 100,
       effects: [
         {
           chance: 1,
-          type: 'REVEAL_MOD'
+          type: EffectTypes.REVEAL_MOD
         }
       ],
       enabled: true
@@ -69,13 +71,13 @@ export default {
 
           if (fired) {
             switch (effect.type) {
-              case 'ADD_MOD':
+              case EffectTypes.ADD_MOD:
                 commit('modifiers/activate', effect.targetId, { root: true })
                 break
-              case 'REMOVE_MOD':
+              case EffectTypes.REMOVE_MOD:
                 commit('modifiers/deactivate', effect.targetId, { root: true })
                 break
-              case 'REVEAL_MOD':
+              case EffectTypes.REVEAL_MOD:
                 dispatch('modifiers/revealRandom', null, { root: true })
                 break
             }
