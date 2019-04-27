@@ -74,23 +74,7 @@ export default {
       var task = state[taskId]
 
       if (task.enabled) {
-        task.effects.forEach(effect => {
-          var fired = Math.random() < effect.chance
-
-          if (fired) {
-            switch (effect.type) {
-              case EffectTypes.ADD_MOD:
-                commit('modifiers/activate', effect.targetId, { root: true })
-                break
-              case EffectTypes.REMOVE_MOD:
-                commit('modifiers/deactivate', effect.targetId, { root: true })
-                break
-              case EffectTypes.REVEAL_MOD:
-                dispatch('modifiers/revealRandom', null, { root: true })
-                break
-            }
-          }
-        })
+        dispatch('modifiers/processEffects', task.effects, { root: true })
 
         commit('disable', taskId)
       }
