@@ -1,5 +1,12 @@
 export var ModIds = {
   MEDICATED: 'MEDICATED',
   TIRED: 'TIRED',
-  HUNGRY: 'HUNGRY'
+  HUNGRY: 'HUNGRY',
+  INFECTION: 'INFECTION',
+  BAD_INFECTION: 'BAD_INFECTION'
+}
+
+export var ModTypes = {
+  DEFAULT: 'DEFAULT',
+  DISEASE: 'DISEASE'
 }

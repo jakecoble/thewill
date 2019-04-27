@@ -4,12 +4,14 @@ export default {
   state: {
     hygiene: {
       display_name: 'hygiene',
-      baseValue: 100
+      baseValue: 100,
+      diseaseMult: 0.2
     },
 
     health: {
       display_name: 'health',
-      baseValue: 100
+      baseValue: 100,
+      diseaseMult: 0.5
     },
 
     org: {
@@ -33,6 +35,16 @@ export default {
         })
 
       return stats
+    },
+
+    diseaseChance (state, getters) {
+      var stats = getters.allStats
+
+      return Object.keys(stats)
+        .reduce((chance, key) => {
+          var statChance = Math.floor((stats[key].baseValue - stats[key].value) * stats[key].diseaseMult || 0)
+          return chance + statChance
+        }, 0)
     }
   },
 

@@ -5,6 +5,8 @@ import stats from './modules/stats'
 import modifiers from './modules/modifiers'
 import tasks from './modules/tasks'
 
+import { ModTypes } from './modules/modifiers/constants.js'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -44,6 +46,7 @@ export default new Vuex.Store({
   actions: {
     endDay ({ commit, dispatch, getters, state }) {
       dispatch('modifiers/decay')
+      dispatch('diseaseCheck')
       commit('will', getters['maxWill'])
     },
 
@@ -55,6 +58,17 @@ export default new Vuex.Store({
       }).then(spent => {
         commit('spend', spent)
       }).catch(e => console.log(e))
+    },
+
+    diseaseCheck ({ state, commit, getters }) {
+      var diseaseRoll = Math.floor(Math.random() * 100)
+
+      if (diseaseRoll < getters['stats/diseaseChance']) {
+        var diseases = getters['modifiers/modsByType'](ModTypes.DISEASE)
+        var diseaseIdx = Math.floor(Math.random() * diseases.length)
+
+        commit('modifiers/activate', diseases[diseaseIdx].id)
+      }
     }
   }
 })
