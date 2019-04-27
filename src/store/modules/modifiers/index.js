@@ -4,9 +4,8 @@ import { TaskIds } from '../tasks/constants.js'
 export default {
   namespaced: true,
 
-  state: [
-    {
-      id: ModIds.MEDICATED,
+  state: {
+    [ModIds.MEDICATED]: {
       display_name: 'Medicated',
       description: 'Sometimes a salve, sometimes an ordeal, always a gamble.',
       will: 3,
@@ -15,8 +14,7 @@ export default {
       active: false
     },
 
-    {
-      id: ModIds.TIRED,
+    [ModIds.TIRED]: {
       display_name: 'Tired',
       description: 'Your body is heavy with the weight of fatigue.',
       will: -2,
@@ -25,31 +23,32 @@ export default {
       hidden: true
     },
 
-    {
-      id: ModIds.HUNGRY,
+    [ModIds.HUNGRY]: {
       display_name: 'Hungry',
       description: 'Your stomach rumbles in complaint.',
       will: -2,
       addTasks: [TaskIds.EAT_CANNED_FOOD],
       active: true
     }
-  ],
+  },
 
   getters: {
-    activeMods (state) {
-      var active = []
-
-      for (let mod of state) {
-        if (mod.active) {
-          active.push(mod)
-        }
-      }
-
-      return active
+    allMods (state) {
+      return Object.keys(state)
+        .map(key => {
+          return {
+            ...state[key],
+            id: key
+          }
+        })
     },
 
-    hiddenMods (state) {
-      return state.filter(mod => mod.hidden)
+    activeMods (state, getters) {
+      return getters.allMods.filter(mod => mod.active)
+    },
+
+    hiddenMods (state, getters) {
+      return getters.allMods.filter(mod => mod.hidden)
     },
 
     reducedModBonuses: (state, getters) => (bonusType) => {
@@ -59,23 +58,23 @@ export default {
 
   mutations: {
     activate (state, modId) {
-      state.find(mod => mod.id === modId).active = true
+      state[modId].active = true
     },
 
     deactivate (state, modId) {
-      state.find(mod => mod.id === modId).active = false
+      state[modId].active = false
     },
 
     reveal (state, modId) {
-      state.find(mod => mod.id === modId).hidden = false
+      state[modId].hidden = false
     },
 
     decay (state, modId) {
-      state.find(mod => mod.id === modId).currentDecay += 1
+      state[modId].currentDecay += 1
     },
 
     resetDecay (state, modId) {
-      state.find(mod => mod.id === modId).currentDecay = 0
+      state[modId].currentDecay = 0
     }
   },
 
@@ -87,13 +86,15 @@ export default {
       commit('reveal', hidden[idx].id)
     },
 
-    decay ({ commit, state }) {
-      state.forEach(mod => {
-        commit('decay', mod.id)
+    decay ({ commit, state, getters }) {
+      getters.activeMods.forEach(mod => {
+        if (mod.duration) {
+          commit('decay', mod.id)
 
-        if (mod.currentDecay === mod.duration) {
-          commit('deactivate', mod.id)
-          commit('resetDecay', mod.id)
+          if (mod.currentDecay === mod.duration) {
+            commit('deactivate', mod.id)
+            commit('resetDecay', mod.id)
+          }
         }
       })
     }
