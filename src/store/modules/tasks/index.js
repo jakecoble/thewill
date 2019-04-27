@@ -1,4 +1,5 @@
 import { TaskIds, EffectTypes } from './constants.js'
+import { ModIds } from '../modifiers/constants.js'
 
 export default {
   namespaced: true,
@@ -12,7 +13,7 @@ export default {
         {
           chance: 0.75,
           type: EffectTypes.ADD_MOD,
-          targetId: 'MEDICATED'
+          targetId: ModIds.MEDICATED
         }
       ],
       enabled: true
@@ -26,7 +27,7 @@ export default {
         {
           chance: 1,
           type: EffectTypes.REMOVE_MOD,
-          targetId: 'HUNGRY'
+          targetId: ModIds.HUNGRY
         }
       ],
       enabled: true
