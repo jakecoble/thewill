@@ -3,9 +3,8 @@ import { TaskIds, EffectTypes } from './constants.js'
 export default {
   namespaced: true,
 
-  state: [
-    {
-      id: TaskIds.VISIT_DOCTOR,
+  state: {
+    [TaskIds.VISIT_DOCTOR]: {
       display_name: 'Visit the doctor.',
       will_cost: 5,
       money_cost: 50,
@@ -19,8 +18,7 @@ export default {
       enabled: true
     },
 
-    {
-      id: TaskIds.EAT_CANNED_FOOD,
+    [TaskIds.EAT_CANNED_FOOD]: {
       display_name: 'Eat canned food.',
       will_cost: 1,
       money_cost: 2,
@@ -34,8 +32,7 @@ export default {
       enabled: true
     },
 
-    {
-      id: TaskIds.VISIT_THERAPIST,
+    [TaskIds.VISIT_THERAPIST]: {
       display_name: 'Visit a therapist.',
       will_cost: 2,
       money_cost: 100,
@@ -47,23 +44,33 @@ export default {
       ],
       enabled: true
     }
-  ],
+  },
 
   getters: {
-    availableTasks (state) {
-      return state.filter(task => task.enabled)
+    allTasks (state) {
+      return Object.keys(state)
+        .map(key => {
+          return {
+            ...state[key],
+            id: key
+          }
+        })
+    },
+
+    availableTasks (state, getters) {
+      return getters.allTasks.filter(task => task.enabled)
     }
   },
 
   mutations: {
     disable (state, taskId) {
-      state.find(task => task.id === taskId).enabled = false
+      state[taskId].enabled = false
     }
   },
 
   actions: {
     activate ({ commit, dispatch, state }, taskId) {
-      var task = state.find(task => task.id === taskId)
+      var task = state[taskId]
 
       if (task.enabled) {
         task.effects.forEach(effect => {
@@ -84,16 +91,16 @@ export default {
           }
         })
 
-        commit('disable', task.id)
+        commit('disable', taskId)
       }
     },
 
     activateIfAffordable ({ dispatch, state }, { taskId, will, money }) {
-      var task = state.find(task => task.id === taskId)
+      var task = state[taskId]
 
       return new Promise((resolve, reject) => {
         if (will >= task.will_cost && money >= task.money_cost) {
-          dispatch('activate', task.id)
+          dispatch('activate', taskId)
 
           resolve({
             will: task.will_cost,
