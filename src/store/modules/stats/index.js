@@ -4,52 +4,35 @@ export default {
   state: {
     hygiene: {
       display_name: 'hygiene',
-      value: 100
+      baseValue: 100
     },
 
     health: {
       display_name: 'health',
-      value: 100
+      baseValue: 100
     },
 
     org: {
       display_name: 'organization',
-      value: 100
+      baseValue: 100
     }
   },
 
   getters: {
-    hygiene (state, getters, rootState, rootGetters) {
-      var modBonus = rootGetters['modifiers/reducedModBonuses']('hygiene')
-      return {
-        ...state.hygiene,
-        value: state.hygiene.value + modBonus
-      }
-    },
+    allStats (state, getters, rootState, rootGetters) {
+      var stats = {}
 
-    health (state, getters, rootState, rootGetters) {
-      var modBonus = rootGetters['modifiers/reducedModBonuses']('health')
-      return {
-        ...state.health,
-        value: state.health.value + modBonus
-      }
-    },
+      Object.keys(state)
+        .forEach(key => {
+          var modBonus = rootGetters['modifiers/reducedModBonuses'](key)
 
-    org (state, getters, rootState, rootGetters) {
-      var modBonus = rootGetters['modifiers/reducedModBonuses']('org')
-      return {
-        ...state.org,
-        value: state.org.value + modBonus
-      }
-    },
+          stats[key] = {
+            ...state[key],
+            value: state[key].baseValue + modBonus
+          }
+        })
 
-    // TODO: I don't know yet if returning getters like this will mess with reactivity.
-    allStats (state, getters) {
-      return [
-        getters.hygiene,
-        getters.health,
-        getters.org
-      ]
+      return stats
     }
   },
 
