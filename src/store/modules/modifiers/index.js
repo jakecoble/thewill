@@ -1,5 +1,4 @@
-import { ModIds, ModTypes } from './constants.js'
-import { TaskIds, EffectTypes } from '../tasks/constants.js'
+import { ModIds, ModTypes, TaskIds, EffectTypes } from '../constants.js'
 
 export default {
   namespaced: true,

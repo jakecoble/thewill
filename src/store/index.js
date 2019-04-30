@@ -5,7 +5,7 @@ import stats from './modules/stats'
 import modifiers from './modules/modifiers'
 import tasks from './modules/tasks'
 
-import { ModTypes } from './modules/modifiers/constants.js'
+import { ModTypes } from './modules/constants.js'
 
 Vue.use(Vuex)
 
