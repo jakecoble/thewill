@@ -1,3 +1,8 @@
+/* tasks.js
+ * Various choices that the player can make. These choices have different
+ * effects on the modifiers - activating some, deactivating others. They can
+ * also change the player's stats.
+ */
 import { TaskIds, EffectTypes, ModIds } from '../constants.js'
 
 export default {
@@ -70,6 +75,7 @@ export default {
 
   actions: {
     activate ({ commit, dispatch, state }, taskId) {
+      // If the task is available, activate its effects
       var task = state[taskId]
 
       if (task.enabled) {
@@ -80,6 +86,7 @@ export default {
     },
 
     activateIfAffordable ({ dispatch, state }, { taskId, will, money }) {
+      // If the player has the resources, activate the chosen task
       var task = state[taskId]
 
       return new Promise((resolve, reject) => {
@@ -91,6 +98,8 @@ export default {
             money: task.money_cost
           })
         } else {
+          // The player shouldn't even have the option to activate a task they
+          // can't afford
           reject(new Error('Attempted to purchase unaffordable task'))
         }
       })

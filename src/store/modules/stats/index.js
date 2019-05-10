@@ -1,3 +1,7 @@
+/* stats.js
+ * Values that influence the costs or effects of tasks. Some also influence the
+ * chance of developing a disease at the end of a player's turn.
+ */
 export default {
   namespaced: true,
 
@@ -22,6 +26,7 @@ export default {
 
   getters: {
     allStats (state, getters, rootState, rootGetters) {
+      // Return a list of stats with their values modified by active modifiers.
       var stats = {}
 
       Object.keys(state)
@@ -38,6 +43,7 @@ export default {
     },
 
     diseaseChance (state, getters) {
+      // Calculate the chance of developing a disease at the end of a turn.
       var stats = getters.allStats
 
       return Object.keys(stats)

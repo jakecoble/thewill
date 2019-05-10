@@ -1,3 +1,7 @@
+/* modifiers.js
+ * Modifiers affect the player's stats and available willpower. Some modifiers
+ * are hidden and can be revealed by certain tasks.
+ */
 import { ModIds, ModTypes, TaskIds, EffectTypes } from '../constants.js'
 
 export default {
@@ -72,15 +76,6 @@ export default {
       active: false,
       type: ModTypes.DEFAULT,
       effects: []
-    },
-
-    'SUPER_DEAD': {
-      display_name: 'Super Dead',
-      description: 'Just absolutely screwed. (Testing)',
-      hygiene: -90,
-      active: true,
-      type: ModTypes.DEFAULT,
-      effects: []
     }
   },
 
@@ -104,6 +99,7 @@ export default {
     },
 
     reducedModBonuses: (state, getters) => (bonusType) => {
+      // Aggregate the total bonus or malus for a particular stat.
       return getters.activeMods.reduce((bonus, mod) => bonus + (mod[bonusType] || 0), 0)
     },
 
@@ -136,6 +132,7 @@ export default {
 
   actions: {
     revealRandom ({ commit, getters }) {
+      // Reveal a random hidden modifier
       var hidden = getters.hiddenMods
       var idx = Math.floor(Math.random() * hidden.length)
 
@@ -143,6 +140,8 @@ export default {
     },
 
     processEffects ({ commit, dispatch }, effects) {
+      // For all the given effects, perform the appropriate action (by chance if
+      // appropriate)
       effects.forEach(effect => {
         if (Math.random() < effect.chance) {
           switch (effect.type) {

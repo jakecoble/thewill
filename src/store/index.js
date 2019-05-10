@@ -24,6 +24,7 @@ export default new Vuex.Store({
 
   getters: {
     maxWill (state, getters) {
+      // computes the player's maximum willpower based on currently active modifiers
       var maxWill = state.baseMaxWill
       var activeMods = getters['modifiers/activeMods']
 
@@ -45,12 +46,14 @@ export default new Vuex.Store({
 
   actions: {
     endDay ({ commit, dispatch, getters, state }) {
+      // run all the checks and reset the player's willpower at the end of a turn
       dispatch('modifiers/decay')
       dispatch('diseaseCheck')
       commit('will', getters['maxWill'])
     },
 
     activateTask ({ commit, dispatch, state }, taskId) {
+      // activate a tasks effects if it can be afforded
       dispatch('tasks/activateIfAffordable', {
         taskId,
         will: state.will,
@@ -61,6 +64,7 @@ export default new Vuex.Store({
     },
 
     diseaseCheck ({ state, commit, getters }) {
+      // roll to check if the player develops a disease
       var diseaseRoll = Math.floor(Math.random() * 100)
 
       if (diseaseRoll < getters['stats/diseaseChance']) {
