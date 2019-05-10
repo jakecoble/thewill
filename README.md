@@ -1,29 +1,8 @@
-# spoons
+# The Will
 
-## Project setup
-```
-yarn install
-```
+Work-in-progress browser strategy game about overcoming adversity.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+The content is very incomplete. Due to an outstanding bug, you'll have to click
+"End Day" once to get willpower to reset before you can do anything.
 
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+The list of tasks on the far right are clickable.

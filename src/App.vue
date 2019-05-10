@@ -1,28 +1,63 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="resources">
+      will: {{ will }}/{{ maxWill }} | money: {{ money }}
+    </div>
+    <div class="panel-group">
+      <Stats class="panel" />
+      <Modifiers class="panel" />
+      <Tasks class="panel" />
+    </div>
+    <EndDayButton />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import { mapGetters, mapState } from 'vuex'
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  import Stats from './components/Stats.vue'
+  import Modifiers from './components/Modifiers.vue'
+  import Tasks from './components/Tasks.vue'
+  import EndDayButton from './components/EndDayButton.vue'
+
+  export default {
+    name: 'app',
+    components: {
+      Stats,
+      Modifiers,
+      Tasks,
+      EndDayButton
+    },
+    computed: {
+      ...mapGetters([
+        'maxWill'
+      ]),
+
+      ...mapState({
+        will: store => store.will,
+        money: store => store.money
+      })
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body, div, ul, li {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font: inherit;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .panel-group {
+    display: flex;
+  }
+
+  .panel {
+    flex-grow: 1;
+  }
 </style>
