@@ -19,6 +19,7 @@
 <style scoped>
   .task {
     display: flex;
+    cursor: pointer;
   }
 
   .costs {
